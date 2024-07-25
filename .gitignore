@@ -1,0 +1,4 @@
+outputs
+.vscode
+__pycache__
+wandb

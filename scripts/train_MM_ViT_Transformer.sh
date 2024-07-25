@@ -1,0 +1,12 @@
+CUDA_VISIBLE_DEVICES=0 python main_mm.py \
+--exp_name MultiASL \
+--model_name CNN2D_Transformer \
+--video_encoder vit_small_patch32_224.augreg_in21k_ft_in1k \
+--fusion_type max \
+--wandb online \
+--len_feature 384 \
+--num_epochs 50 \
+--num_segments 50 \
+--batch_size 12 \
+--num_workers 8 \
+--data_path dataset/MM-Office
