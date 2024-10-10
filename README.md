@@ -1,55 +1,14 @@
-## Action Selection Learning for Multi-label Multi-view Action Recognition
-[[paper](https://arxiv.org/abs/2410.03302)]
-
-This work was accepted for presentation at ACM MMAsia 2024, to be held in Auckland, New Zealand, from December 3-6, 2024.
-
-**Authors:** [Trung Thanh Nguyen](https://scholar.google.com/citations?user=QSV452QAAAAJ), [Yasutomo Kawanishi](https://scholar.google.com/citations?user=Tdfw6WMAAAAJ), [Takahiro Komamizu](https://scholar.google.com/citations?user=j4n_V44AAAAJ), [Ichiro Ide](https://scholar.google.com/citations?user=8PXJm98AAAAJ)
+# Zero-PIMA | Zero-shot Pill-Prescription Matching with Graph Convolutional Network and Contrastive Learning
 
 
-## Introduction
-This repository contains the implementation of MultiASL (Multi-view Action Selection Learning) on the MM-Office dataset.
-
-
-## Environment
-
-The Python code is developed and tested in the environment specified in `environment.yml`. 
-Experiments on the MM-Office dataset were conducted on a single NVIDIA RTX A6000 GPU with 48 GB of GPU memory. 
-You can adjust the `batch_size` to accommodate GPUs with smaller memory.
-
-
-## Dataset
-
-Download the MM-Office dataset [here](https://github.com/nttrd-mdlab/mm-office) and place it in the `dataset/MM-Office` directory.
-
-## Training
-To train the model, execute the following command:
+This repository is the website of 'Zero-shot Pill-Prescription Matching with Graph Convolutional Network and Contrastive Learning' by Trung Thanh Nguyen, Phi Le Nguyen, Yasutomo Kawanishi, Takahiro Komamizu, and Ichiro Ide.
 ```
-    bash ./scripts/train_MM_ViT_Transformer.sh
+@article{nguyen2024zeropima,
+title={Zero-shot Pill-Prescription Matching with Graph Convolutional Network and Contrastive Learning}, 
+author={Trung Thanh Nguyen and Phi Le Nguyen and Kawanishi Yasutomo and Takahiro Komamizu and Ichiro Ide},
+year={2024},
+journal={IEEE Access}
 ```
 
-## Inference
-To perform inference, use the following command:
-```
-    bash ./scripts/infer_MM_ViT_Transformer.sh
-```
-
-## Citation
-
-If you find this code useful for your research, please cite the following paper:
-```
-@inproceedings{nguyen2024MultiASL,
-    title={Action Selection Learning for Multi-label Multi-view Action Recognition},
-    author={Trung Thanh Nguyen, Yasutomo Kawanishi, Takahiro Komamizu, Ichiro Ide},
-    year={2024}
-}
-```
-
-This source code is based on the following paper:
-```
-@inproceedings{ma2021asl,
-  title={Weakly Supervised Action Selection Learning in Video},
-  author={Ma, Junwei and Gorti, Satya Krishna and Volkovs, Maksims and Yu, Guangwei},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  year={2021}
-}
-```
+# Website License
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.

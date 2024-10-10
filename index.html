@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="The proposed MultiASL method includes two main components: a Multi-view Spatial-Temporal Transformer Video Encoder and an Action Selection Learning (ASL) module. The video encoder extracts spatial and temporal features from multiple viewpoints using a multi-view spatial-temporal transformer. Action Selection Learning is applied at the frame level to select the most relevant actions using pseudo ground-truth obtained from video-level labels.">
+  <meta name="keywords" content="Object Swapping, Personalized Editing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Action Selection Learning for Multi-label Multi-view Action Recognition</title>
+  <!-- Favicon -->
+  <link rel="icon" href="static/images/action.png" type="image/x-icon">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MHMLLQDMS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5MHMLLQDMS');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="icon" href="./static/images/icon.png">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Action Selection Learning for Multi-label Multi-view Action Recognition</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=QSV452QAAAAJ&hl=en" target="_blank">Trung Thanh Nguyen</a><sup>1,3</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=Tdfw6WMAAAAJ&hl=en" target="_blank">Yasutomo Kawanishi</a><sup>3,1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.co.jp/citations?user=j4n_V44AAAAJ&hl=en" target="_blank">Takahiro Komamizu</a><sup>4,1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=8PXJm98AAAAJ&hl=en" target="_blank">Ichiro Ide</a><sup>1,4</sup>,</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Graduate School of Informatics, Nagoya University, Japan</span>
+            <span class="author-block"><sup>2</sup>School of Information and Communication Technology, HUST, Vietnam</span>
+            <span class="author-block"><sup>3</sup>Guardian Robot Project, Information R&D and Strategy Headquarters, RIKEN, Japan</span>
+            <span class="author-block"><sup>4</sup>Center for Artificial Intelligence, Mathematical and Data Science, Nagoya University, Japan</span>
+          </div>
+          
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><b style="color:#e08ba0; font-weight:normal"> <b>ACM Multimedia Asia 2024</b> </b></span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2410.03302"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>MultiASL</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2410.03302"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/thanhhff/MultiASL/"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/nttrd-mdlab/mm-office/"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="text-align: center;">
+      <img id="teaser" width="80%" src="./static/images/GA.jpg">
+      <div style="text-align: center;">
+        <h3 class="subtitle">
+          <p>Figure 1. The proposed Zero-PIMA method leverages the pill features obtained through object localization and employs a Graph Convolutional Network (GCN) to extract pill name features from prescriptions. The matching process is achieved through contrastive learning.</p>
+        </h3>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section" style="background-color:#efeff081">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Multi-label multi-view action recognition aims to recognize multiple concurrent or sequential actions from untrimmed videos captured by multiple cameras. Existing work has focused on multi-view action recognition in a narrow area with strong labels available, where the onset and offset of each action are labeled at the frame-level. This study focuses on real-world scenarios where cameras are distributed to capture a wide-range area with only weak labels available at the video-level. We propose the method named MultiASL (Multi-view Action Selection Learning), which leverages action selection learning to enhance view fusion by selecting the most useful information from different viewpoints. The proposed method includes a Multi-view Spatial-Temporal Transformer video encoder to extract spatial and temporal features from multi-viewpoint videos. Action Selection Learning is employed at the frame-level, using pseudo ground-truth obtained from weak labels at the video-level, to identify the most relevant frames for action recognition. Experiments in a real-world office environment using the MM-Office dataset demonstrate the superior performance of the proposed method compared to existing methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="static/images/action.png"> Introduction </h2> 
+      </div>
+    </div>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-six-fifths">
+            <div class="content has-text-justified">
+             <p> Action recognition has garnered significant interest due to its wide applications in surveillance, robotics, and video content analysis. With advancements in multi-camera systems, there is a growing need to capture and analyze actions from different viewpoints to obtain comprehensive understanding. However, conventional single-view methods are limited in their perspective and may result in incomplete understanding. This study proposes MultiASL, a method designed to improve multi-view action recognition in real-world scenarios, by selecting the most relevant information from various viewpoints.
+            </p>
+            </div>
+            <div style="text-align: center;">
+              <img id="model" width="60%" src="./static/images/view-setting.png">
+              <p>Figure 1. Configuration of multi-view settings. (a) Multiple cameras arranged to surround a target in a narrow area. (b) Multiple distributed cameras covering a wide-range area.</p>
+            </div>
+        </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="static/images/action.png"> Methodology </h2> 
+      </div>
+    </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-six-fifths">  
+            <div class="content has-text-justified">
+              The proposed MultiASL method includes two main components: a Multi-view Spatial-Temporal Transformer Video Encoder and an Action Selection Learning (ASL) module. The video encoder extracts spatial and temporal features from multiple viewpoints using a multi-view spatial-temporal transformer. Action Selection Learning is applied at the frame level to select the most relevant actions using pseudo ground-truth obtained from video-level labels.
+            </div>        
+            <div style="text-align: center;">
+              <img id="model" width="100%" src="./static/images/model.png">
+              <p>Figure 2. Overview of the proposed MultiASL method.</p>
+            </div>
+        </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="static/images/action.png"> Experiments </h2> 
+      </div>
+    </div>
+      <div class="column is-six-fifths">  
+        <div class="content has-text-justified">
+            The experiments were conducted on the MM-Office dataset, a collection of videos recorded in a real-world office environment using multiple distributed cameras. The proposed MultiASL method demonstrates superior performance compared to existing multi-view action recognition methods. Various view-level fusion strategies, such as max pooling and mean pooling, were evaluated, with max pooling consistently yielding the best results.
+      </div>   
+      <div style="text-align: center;">
+        <img id="model" width="100%" src="./static/images/results.png">
+        <p>Table 1: Comparison of the proposed MultiASL and other methods. The best and second-best results are highlighted in bold and underlined text, respectively</p>
+      </div>
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="static/images/action.png"> Acknowledgment </h2> 
+      </div>
+    </div>
+      <div class="column is-six-fifths">  
+        <div class="content has-text-justified">
+          This work was partly supported by Japan Society for the Promotion of Science (JSPS) KAKENHI JP21H03519 and JP24H00733.
+          The computation was carried out using the General Projects on the supercomputer "Flow" with the Information Technology Center, Nagoya University.
+      </div>   
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{nguyen2024MultiASL,
+      title={Action Selection Learning for Multilabel Multiview Action Recognition},
+      author={Nguyen, Trung Thanh and Kawanishi, Yasutomo and Komamizu, Takahiro and Ide, Ichiro},
+      booktitle={ACM Multimedia Asia 2024},
+      pages={1--7},
+      year={2024},
+}</code></pre></div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>Contact: Trung Thanh NGUYEN - nguyent[at]cs.is.i.nagoya-u.ac.jp or thanh.nguyen.rc[at]a.riken.jp</p>
+          <p>
+            This website is adapted from <a rel="license"
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
