@@ -33,14 +33,19 @@ To perform inference, use the following command:
     bash ./scripts/infer_MM_ViT_Transformer.sh
 ```
 
+## Acknowledgment
+This work was partly supported by Japan Society for the Promotion of Science (JSPS) KAKENHI JP21H03519 and JP24H00733. The computation was carried out using the General Projects on the supercomputer "Flow" with the Information Technology Center, Nagoya University.
+
 ## Citation
 
 If you find this code useful for your research, please cite the following paper:
 ```
 @inproceedings{nguyen2024MultiASL,
-    title={Action Selection Learning for Multi-label Multi-view Action Recognition},
-    author={Trung Thanh Nguyen, Yasutomo Kawanishi, Takahiro Komamizu, Ichiro Ide},
-    year={2024}
+      title={Action Selection Learning for Multilabel Multiview Action Recognition},
+      author={Nguyen, Trung Thanh and Kawanishi, Yasutomo and Komamizu, Takahiro and Ide, Ichiro},
+      booktitle={ACM Multimedia Asia 2024},
+      pages={1--7},
+      year={2024},
 }
 ```
 
