@@ -1,5 +1,5 @@
 ## Action Selection Learning for Multi-label Multi-view Action Recognition
-[[paper](https://arxiv.org/abs/2410.03302)]
+[[paper](https://arxiv.org/abs/2410.03302)] [[website](https://thanhhff.github.io/MultiASL/)]
 
 This work was accepted for presentation at ACM MMAsia 2024, to be held in Auckland, New Zealand, from December 3-6, 2024.
 
